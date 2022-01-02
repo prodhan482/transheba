@@ -26,8 +26,7 @@ SECRET_KEY = 'tpc07=5w2z&105k#=pgt1)c_pv*81@qj-qt_^#_o)m0u7#rrrs'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['prodhan-transheba.herokuapp.com', '127.0.0.1:8000']
 # Application definition
 
 INSTALLED_APPS = [
