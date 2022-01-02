@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <br><br><h2 class="alert alert-info" role="alert">Apply For Relief </h2>
+    
+    <h3>Fill the form: </h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ relief_form.Name|as_crispy_field }}
+        {{ relief_form.NID_No|as_crispy_field }}
+        {{ relief_form.Phone_no|as_crispy_field }}
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ relief_form.Birth_Date|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6 mb-0">
+                {{ relief_form.Marital_Status|as_crispy_field }}
+              </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6 mb-0">
+            {{ relief_form.Distric|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-4 mb-0">
+            {{ relief_form.Village|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-2 mb-0">
+            {{ relief_form.ZIP_Code|as_crispy_field }}
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Apply</button>
+      </form>
+    {% endblock content %}
+</div>
+

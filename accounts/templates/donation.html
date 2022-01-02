@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<br><br>
+<h2 class="alert alert-info" role="alert">Apply For Relief </h2>
+<h3>Fill the form: </h3>
+<form method="post">
+    {% csrf_token %}
+    {{ donate_form.Name|as_crispy_field }}
+    {{ donate_form.Share_something|as_crispy_field }}
+    {{ donate_form.Phone_no|as_crispy_field }}
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            {{ donate_form.Marital_Status|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            {{ donate_form.Area|as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2 mb-0">
+            {{ donate_form.Payment_Method|as_crispy_field }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Next</button>
+</form>
+{% endblock content %}
+</div>
+</div>

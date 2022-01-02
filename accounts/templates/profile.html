@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="card text-center">
+    <div class="card-header">
+      Profile Info
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Welcome, {{ User.first_name }} {{ User.last_name }}</h5>
+      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+      <div class="card-text">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">First Name: {{ user.first_name }}</li>
+            <li class="list-group-item">Last Name: {{ user.last_name }}</li>
+            <li class="list-group-item">Username: {{ user.username }}</li>
+            <li class="list-group-item">Email: {{ user.email }}</li>
+          </ul>
+      </div>
+      <a href="{% url 'profile' %}" class="btn btn-primary">Edit Profile</a>
+    </div>
+    <div class="card-footer text-muted">
+    </div>
+  </div>
+
+{% endblock content %}

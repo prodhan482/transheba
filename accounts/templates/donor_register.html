@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+{% if registered %}
+<h1 action="{% url 'login' %}">Thank you for registering</h1>
+{% else %}
+    <br><br><h2 class="alert alert-info" role="alert">Donor Registration Form </h2>
+    
+    <h3>Fill the form: </h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form|crispy }}
+        {{ profile_form|crispy }}
+        <div>
+            <div>
+                <input type="submit">
+            </div>
+        </div>
+    </form>
+    <span>Signup as a Donor  </span><a href="{% url 'helpless_register' %}">click here</a><br>
+    <span>Already have an account? </span><a href="{% url 'login' %}">Login</a>
+    {% endif %}
+    {% endblock content %}
+</div>
+

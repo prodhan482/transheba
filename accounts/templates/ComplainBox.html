@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+  <div>
+    <a href="{% url 'home' %}">Home</a>
+    <div class="row d-flex justify-content-center text-center">
+      <div class="col-md-10 text-white">
+        <!-- heading -->
+          <h2 class="display-4 font-weight-bold  p-5 " style="color:#ff5722;" align="center" > Complain </h2>
+
+        <!-- divider -->
+        <hr style="color:#ff5722;">
+      </div>
+    </div>
+  </div>
+
+
+
+{% block content %}
+
+               <h2 class="mb-5 font-weight-bold" style="color:#ff5722;" align="center">Report Your Problem</h2>
+              <div class="row justify content center" align="center">
+              <div class="col-md-12">
+                  <form method="post">
+                    <div class="form-group">
+                      {% csrf_token %}
+                      {{form|crispy}}
+                      <input type="submit" value="Submit Response" class="btn btn-success btn-lg btn-block">
+                    </div>
+                  </form>
+              </div>
+              </div>
+
+{% endblock content %}
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+        const options = {
+            bottom: '55px', // default: '32px'
+            right: 'unset', // default: '32px'
+            left: '32px', // default: 'unset'
+            time: '0.5s', // default: '0.3s'
+            mixColor: '#fff', // default: '#fff'
+            backgroundColor: '#fff',  // default: '#fff'
+            buttonColorDark: '#100f2c',  // default: '#100f2c'
+            buttonColorLight: '#fff', // default: '#fff'
+            saveInCookies: true, // default: true,
+            label: '🌓', // default: ''
+            autoMatchOsTheme: true // default: true
+        }
+
+        const darkmode = new Darkmode(options);
+        darkmode.showWidget();
+    </script>

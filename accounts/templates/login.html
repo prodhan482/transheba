@@ -1,0 +1,477 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load static %}
+{% load socialaccount %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 100%;
+        width: 100%;
+        font-family: 'Poppins'sans-serif;
+    }
+
+    input {
+        outline: none;
+        border: none;
+    }
+
+    input:focus {
+        border-color: transparent !important;
+    }
+
+    input:focus::-webkit-input-placeholder {
+        color: transparent !important;
+    }
+
+    input::-webkit-input-placeholder {
+        color: #ffffff;
+    }
+
+    .limiter {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .container-login {
+        width: 150%;
+        min-height: 100vh;
+        display: flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+
+    }
+
+    .wrap-login {
+        width: 450px;
+        background: rgba(0, 0, 0, 0);
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 66px 55px 33px 55px;
+        box-shadow: 0 0 3px 3px #eb0b0b,
+            6px 6px 8px 4px rgba(248, 26, 26, 0.7),
+            -6px -6px 8px 4px rgba(241, 9, 9, 0.7);
+    }
+
+    .login-form {
+        width: 100%;
+    }
+
+    .login-form-title {
+        display: block;
+        font-family: 'Poppins';
+        font-size: 30px;
+        font-weight: bold;
+        color: #333333;
+        line-height: 1.2;
+        text-align: center;
+        padding-bottom: 60px;
+    }
+
+    .wrap-input {
+        width: 100%;
+        position: relative;
+        border-bottom: 2px solid #bbb9b9;
+        margin-bottom: 38px;
+    }
+
+    .input {
+        font-family: 'Poppins';
+        font-size: 15px;
+        color: #4caf50;
+        line-height: 1.2;
+        display: block;
+        width: 94%;
+        height: 45px;
+        background: transparent;
+        padding: 0 5px;
+    }
+
+    .focus-input {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+
+    .focus-input:before {
+        content: "";
+        position: absolute;
+        display: block;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #4caf50;
+        transition: all 0.4s;
+
+    }
+
+    .focus-input:after {
+        font-family: 'Poppins';
+        font-size: 15px;
+        color: #999999;
+        line-height: 1.2;
+        content: attr(data-placeholder);
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 16px;
+        left: 0px;
+        padding-left: 5px;
+        transition: all 0.4s;
+        -webkit-transition: all 0.4s;
+    }
+
+    .input:focus+.focus-input:after {
+        top: -15px;
+    }
+
+    .input:focus+.focus-input:before {
+        width: 100%;
+    }
+
+    .has-val.input+.focus-input::after {
+        top: -15px;
+    }
+
+    .has-val.input:focus+.focus-input:before {
+        width: 100%;
+    }
+
+
+    .btn-show-pass {
+        font-size: 15px;
+        color: #999999;
+        display: -webkit-flex;
+        display: -webkit-box;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        right: 0;
+        padding-right: 5px;
+        cursor: pointer;
+        transition: all 0.4s;
+    }
+
+    .btn-show-pass:hover {
+        color: #4CAF50;
+    }
+
+    .btn-show-pass:active {
+        color: #4caf50;
+    }
+
+    button {
+        outline: none !important;
+        border: none;
+        background: transparent;
+    }
+
+    .txt1 {
+        font-family: 'Poppins';
+        font-size: 13px;
+        color: #666666;
+        line-height: 1.5;
+    }
+
+    .txt2 {
+        font-family: 'Poppins';
+        font-size: 13px;
+        color: #333333;
+        line-height: 1.5;
+        text-decoration: none;
+        transition: all 0.4s;
+    }
+
+    .txt2:hover {
+        text-decoration: underline;
+    }
+
+    .container-login-form-btn {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 20px;
+    }
+
+    .wrap-login-form-btn {
+        width: 100%;
+        display: block;
+        position: relative;
+        z-index: 1;
+        border-radius: 25px;
+        overflow: hidden;
+        margin: 0 auto;
+        box-shadow: 0 0 3px 3px #dddddd,
+            4px 4px 6px 2px rgba(136, 136, 136, 0.7),
+            -4px -4px 6px 2px rgba(244, 244, 244, 0.7);
+
+
+    }
+
+    .login-form-btn {
+        font-family: 'Poppins';
+        font-size: 15px;
+        color: #4caf50;
+        line-height: 1.2;
+        font-weight: bold;
+        text-transform: uppercase;
+        display: -webkit-flex;
+        display: -webkit-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        letter-spacing: 1px;
+        padding: 0 20px;
+        height: 50px;
+        width: 100%;
+    }
+
+    .login-form-btn:hover {
+        background: #4caf50;
+        color: #ddd;
+    }
+
+    .login-form-btn:active {
+        background: rgb(255, 145, 19);
+        color: #ddd;
+    }
+
+    .text-center {
+        text-align: center;
+        padding-top: 70px;
+    }
+
+    .validate-input {
+        position: relative;
+    }
+
+    .alert-validate:before {
+        content: attr(data-validate);
+        position: absolute;
+        max-width: 70%;
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid #c80000;
+        padding: 4px 25px 4px 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0px;
+        pointer-events: none;
+        font-family: 'Poppins';
+        color: #c80000;
+        font-size: 13px;
+        line-height: 1.4;
+        text-align: left;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.4s;
+
+    }
+
+    .alert-validate:after {
+        content: "\f1f8";
+        font-family: material-design-iconic-font;
+        font-size: 21px;
+        color: #c80000;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 5px;
+    }
+
+    .alert-validate:hover:before {
+        visibility: visible;
+        opacity: 1;
+
+    }
+
+    .form-signin {
+        width: 100%;
+        max-width: 420px;
+        padding: 15px;
+        margin: auto;
+    }
+
+    .form-label-group {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    .form-label-group>input,
+    .form-label-group>label {
+        height: 3.125rem;
+        padding: .75rem;
+    }
+
+    .form-label-group>label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+        line-height: 1.5;
+        color: #495057;
+        pointer-events: none;
+        cursor: text;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        transition: all .1s ease-in-out;
+    }
+
+    .form-label-group input::-webkit-input-placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input:-ms-input-placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input::-ms-input-placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input::-moz-placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input::placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input:not(:placeholder-shown) {
+        padding-top: 1.25rem;
+        padding-bottom: .25rem;
+    }
+
+
+
+    @supports (-ms-ime-align: auto) {
+        .form-label-group>label {
+            display: none;
+        }
+
+        .form-label-group input::-ms-input-placeholder {
+            color: #777;
+        }
+    }
+
+
+    @media all and (-ms-high-contrast: none),
+    (-ms-high-contrast: active) {
+        .form-label-group>label {
+            display: none;
+        }
+
+        .form-label-group input:-ms-input-placeholder {
+            color: #777;
+        }
+
+        .darkmode--activated .card-header {
+            background-color: black;
+            color: white;
+            box-shadow: 1px 1px 2px 2px rgba(100, 34, 51, 0.5), 1px 1px 2px 2px rgba(100, 34, 51, 0.5);
+        }
+    }
+</style>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+
+
+    <div class="limiter">
+        <div class="container-login">
+            <div class="wrap-login">
+                <form class="login-form validate-form" action="" method="post">
+                    {% csrf_token %}
+                    <span class="login-form-title">
+                        Login
+                    </span>
+
+                    <div class="wrap-input validate-input">
+                        <input class="input" type="text" name="username" id="inputUsername" class="form-control"
+                            required autofocus>
+                        <span class="focus-input" data-placeholder="Username"></span>
+                        {% if login_form.username.errors %}
+                        <p style="color:red">{{ login_form.username.errors }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="wrap-input validate-input">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input class="input" type="password" name="password" id="inputPassword" class="form-control"
+                            required>
+                        <span class="focus-input" data-placeholder="Password"></span>
+                    </div>
+                    {% for field in login_form %}
+                    <p>
+                        {% for error in login_form.field.errors %}
+                    <p style="color: red;">{{field.help_text}}</p>
+                    {% endfor %}
+                    </p>
+                    {% endfor %}
+                    {% if login_form.non_field_errors %}
+                    <div style="color: red;">
+                        <p>{{login_form.non_field_errors}}</p>
+                    </div>
+                    {% endif %}
+
+                    <div class="container-login-form-btn">
+                        <div class="wrap-login-form-btn">
+                            <button class="login-form-btn"> Login </button>
+                        </div>
+                    </div><br>
+                    <li><a href="{% url 'password_reset' %}"> Forgot
+                            password? </a></li>
+                    <div class="text-center">
+                        <span class="txt1">
+                            Don't have an account?
+                        </span>
+                        <li><a href="{% provider_login_url 'google' %}"> Sign in with Google </a></li>
+                        <li><a href="{% url 'helpless_register' %}"> Helpless Registration Form </a></li>
+                        <li><a href="{% url 'donor_register' %}"> Donor Registration Form </a></li>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+
+</body>
+
+
+</html>

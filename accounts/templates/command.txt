@@ -1,0 +1,6 @@
+For Heroku 
+
+CMD:
+1.heroku login
+2. heroku git:remote -a 'app-name'
+3.git remote4.git remote -v

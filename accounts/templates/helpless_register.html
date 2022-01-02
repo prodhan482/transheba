@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<header xmlns="http://www.w3.org/1999/html">
+    <div>
+        <div class="banner">
+            <div class="navbar">
+                <div>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a>About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% block content %}
+{% if registered %}
+<h1 href="{% url 'login' %}">Thank you for registering</h1>
+{% else %}
+<div>
+    <br><br><h2 class="alert alert-info" role="alert">Helpless Registration Form</h2>
+    <h3>Fill the form: </h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form|crispy }}
+        {{ profile_form|crispy }}
+        <div>
+            <div>
+                <input type="submit">
+            </div>
+        </div>
+    </form>
+    <span>Signup as a Donor  </span><a href="{% url 'donor_register' %}">click here</a><br>
+    <span>Already have an account? </span><a href="{% url 'login' %}">Login</a>
+    {% endif %}
+    {% endblock content %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+        const options = {
+            bottom: '55px', // default: '32px'
+            right: 'unset', // default: '32px'
+            left: '32px', // default: 'unset'
+            time: '0.5s', // default: '0.3s'
+            mixColor: '#fff', // default: '#fff'
+            backgroundColor: '#fff',  // default: '#fff'
+            buttonColorDark: '#100f2c',  // default: '#100f2c'
+            buttonColorLight: '#fff', // default: '#fff'
+            saveInCookies: true, // default: true,
+            label: '🌓', // default: ''
+            autoMatchOsTheme: true // default: true
+        }
+
+        const darkmode = new Darkmode(options);
+        darkmode.showWidget();
+    </script>

@@ -1,0 +1,25 @@
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Announcement</h5>
+        <div class="row justify content" align="center">
+          <div class="col-md-8">
+            <form method="post">
+              <div class="form-group">
+                {% csrf_token %}
+                {{form|crispy}}
+              </div>
+            </form>
+          </div>
+        </div>
+        <input type="submit" value="Post" class="btn btn-success btn-lg btn-block">
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
